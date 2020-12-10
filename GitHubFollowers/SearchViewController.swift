@@ -9,13 +9,20 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    // MARK: - Constants
+
+    private enum Constants {
+        static let buttonTitle = "Get Follovers"
+        static let imageName = "gh-logo"
+    }
+
     // MARK: - Private properties
 
     private let logoImageView = UIImageView()
 
     private let usernameTextfield = GFTextField()
 
-    private let getUsersButton = GFButton(backgroundColor: UIColor.systemGreen, title: "Get Follovers")
+    private let getUsersButton = GFButton(backgroundColor: UIColor.systemGreen, title: Constants.buttonTitle)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +53,7 @@ private extension SearchViewController {
     }
 
     func setupContent() {
-        logoImageView.image = UIImage(named: "gh-logo")!
+        logoImageView.image = UIImage(named: Constants.imageName)!
     }
 
     func setupConstraints() {
