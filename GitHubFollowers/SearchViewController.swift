@@ -16,6 +16,10 @@ class SearchViewController: UIViewController {
         static let imageName = "gh-logo"
     }
 
+    var isUsernameEntered: Bool {
+        return !usernameTextfield.text!.isEmpty
+    }
+
     // MARK: - Private properties
 
     private let logoImageView = UIImageView()
@@ -46,6 +50,7 @@ private extension SearchViewController {
         setupContent()
         setupConstraints()
         usernameTextfield.delegate = self
+        didTapActionButton()
     }
 
     func setupViewHierarhy() {
@@ -86,6 +91,22 @@ private extension SearchViewController {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
     }
+
+    func didTapActionButton() {
+        getUsersButton.addTarget(self, action: #selector(pushFollowerListVC), for: .touchUpInside)
+    }
+
+    @objc func pushFollowerListVC() {
+
+        guard isUsernameEntered else {
+            print("No username")
+            return
+        }
+        let followerListVc = FollowersListViewController()
+        followerListVc.username = usernameTextfield.text
+        followerListVc.title = usernameTextfield.text
+        navigationController?.pushViewController(followerListVc, animated: true)
+    }
 }
 
 // MARK: - TextField delegate
@@ -93,7 +114,7 @@ private extension SearchViewController {
 extension SearchViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+        pushFollowerListVC()
         return true
     }
 }
