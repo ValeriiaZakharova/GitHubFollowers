@@ -28,6 +28,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupUI()
+        createDismissKeyboardTapGesture()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +45,7 @@ private extension SearchViewController {
         setupViewHierarhy()
         setupContent()
         setupConstraints()
+        usernameTextfield.delegate = self
     }
 
     func setupViewHierarhy() {
@@ -78,5 +80,20 @@ private extension SearchViewController {
             getUsersButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             getUsersButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+
+    func createDismissKeyboardTapGesture() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+}
+
+// MARK: - TextField delegate
+
+extension SearchViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        return true
     }
 }

@@ -15,6 +15,7 @@
 		CFC3BA282577FF0E004AC221 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFC3BA262577FF0E004AC221 /* LaunchScreen.storyboard */; };
 		CFC3BA3325781D26004AC221 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC3BA3225781D26004AC221 /* SearchViewController.swift */; };
 		CFC3BA3625781D81004AC221 /* FavoritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC3BA3525781D81004AC221 /* FavoritesListViewController.swift */; };
+		CFC67564259E2A6400DC784E /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC67563259E2A6400DC784E /* FollowersListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		CFC3BA292577FF0E004AC221 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFC3BA3225781D26004AC221 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CFC3BA3525781D81004AC221 /* FavoritesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewController.swift; sourceTree = "<group>"; };
+		CFC67563259E2A6400DC784E /* FollowersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				CFC3BA1D2577FF0D004AC221 /* SceneDelegate.swift */,
 				CFC3BA3225781D26004AC221 /* SearchViewController.swift */,
 				CFC3BA3525781D81004AC221 /* FavoritesListViewController.swift */,
+				CFC67563259E2A6400DC784E /* FollowersListViewController.swift */,
 				CFC3BA242577FF0E004AC221 /* Assets.xcassets */,
 				CFC3BA262577FF0E004AC221 /* LaunchScreen.storyboard */,
 				CFC3BA292577FF0E004AC221 /* Info.plist */,
@@ -145,6 +148,7 @@
 				CF3D6A3325827D9C008F82F7 /* GFTextField.swift in Sources */,
 				CFC3BA3325781D26004AC221 /* SearchViewController.swift in Sources */,
 				CF3D6A3025827A3A008F82F7 /* GFButton.swift in Sources */,
+				CFC67564259E2A6400DC784E /* FollowersListViewController.swift in Sources */,
 				CFC3BA1C2577FF0D004AC221 /* AppDelegate.swift in Sources */,
 				CFC3BA3625781D81004AC221 /* FavoritesListViewController.swift in Sources */,
 				CFC3BA1E2577FF0D004AC221 /* SceneDelegate.swift in Sources */,
