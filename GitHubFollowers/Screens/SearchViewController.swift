@@ -97,11 +97,11 @@ private extension SearchViewController {
     }
 
     @objc func pushFollowerListVC() {
-
         guard isUsernameEntered else {
-            print("No username")
+            presentAlertViewController(title: "Empty Username", message: "Please enter a username. We need to know who to look for", buttonTitle: "Ok")
             return
         }
+
         let followerListVc = FollowersListViewController()
         followerListVc.username = usernameTextfield.text
         followerListVc.title = usernameTextfield.text
