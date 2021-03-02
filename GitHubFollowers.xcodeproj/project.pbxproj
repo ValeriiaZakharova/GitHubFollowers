@@ -17,6 +17,7 @@
 		CFC1FF2325EE5F5B0029011B /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1FF2225EE5F5B0029011B /* ErrorMessage.swift */; };
 		CFC1FF2B25EE733F0029011B /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1FF2A25EE733F0029011B /* FollowerCell.swift */; };
 		CFC1FF2E25EE73D80029011B /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1FF2D25EE73D80029011B /* AvatarImageView.swift */; };
+		CFC1FF3225EEA4FC0029011B /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1FF3125EEA4FC0029011B /* UIHelper.swift */; };
 		CFC3BA1C2577FF0D004AC221 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC3BA1B2577FF0D004AC221 /* AppDelegate.swift */; };
 		CFC3BA1E2577FF0D004AC221 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC3BA1D2577FF0D004AC221 /* SceneDelegate.swift */; };
 		CFC3BA252577FF0E004AC221 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFC3BA242577FF0E004AC221 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		CFC1FF2225EE5F5B0029011B /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		CFC1FF2A25EE733F0029011B /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		CFC1FF2D25EE73D80029011B /* AvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
+		CFC1FF3125EEA4FC0029011B /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		CFC3BA182577FF0D004AC221 /* GitHubFollowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubFollowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFC3BA1B2577FF0D004AC221 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFC3BA1D2577FF0D004AC221 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				CFC1FF2225EE5F5B0029011B /* ErrorMessage.swift */,
+				CFC1FF3125EEA4FC0029011B /* UIHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				CF3DBB4225C856B200EF5695 /* UIViewController+Extension.swift in Sources */,
 				CF3D6A3325827D9C008F82F7 /* GFTextField.swift in Sources */,
 				CFC3BA3325781D26004AC221 /* SearchViewController.swift in Sources */,
+				CFC1FF3225EEA4FC0029011B /* UIHelper.swift in Sources */,
 				CF3D6A3025827A3A008F82F7 /* GFButton.swift in Sources */,
 				CFC67564259E2A6400DC784E /* FollowersListViewController.swift in Sources */,
 				CFC1FF2B25EE733F0029011B /* FollowerCell.swift in Sources */,
