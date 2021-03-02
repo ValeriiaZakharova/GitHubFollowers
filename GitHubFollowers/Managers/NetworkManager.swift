@@ -16,7 +16,7 @@ class NetworkManager {
     //page - for network call from API
     //Result - enum that returns 2 cases - success or failure
     func getFollowers(for username: String, page: Int, completion: @escaping (Result<[Follower], ErrorMessage>) -> Void) {
-        let endpoint = baseURL + "\(username)/followers?per_page=100&\(page)"
+        let endpoint = baseURL + "\(username)/followers?per_page=100&page=\(page)"
 
         guard let url = URL(string: endpoint) else {
             completion(.failure(.invalidUsername))

@@ -10,9 +10,9 @@ import Foundation
 struct Follower: Codable, Hashable {
     var login: String
     var avatarUrl: String
+}
 
-    ///example to conform hashable only for some object
+//example to conform hashable only for some object
 //    func hash(into hasher: inout Hasher) {
 //        hasher.combine(login)
 //    }
-}

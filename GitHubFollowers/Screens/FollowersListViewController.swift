@@ -11,8 +11,10 @@ class FollowersListViewController: UIViewController {
 
     enum Section { case main }
 
-    var username: String?
+    var username: String!
     var followers: [Follower] = []
+    var page = 1
+    var hasMoreFollowers = true
 
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
@@ -21,7 +23,7 @@ class FollowersListViewController: UIViewController {
         super.viewDidLoad()
         configureViewController()
         configureCollectionview()
-        getfollowers()
+        getfollowers(username: username, page: page)
         configureDataSource()
     }
 
@@ -32,23 +34,28 @@ class FollowersListViewController: UIViewController {
 
     func configureViewController() {
         view.backgroundColor = .systemBackground
-        navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     func configureCollectionview() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
         view.addSubview(collectionView)
+        collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
     }
 
-    func getfollowers() {
-        NetworkManager.shared.getFollowers(for: username!, page: 1) { [weak self] result in
+    func getfollowers(username: String, page: Int) {
+        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
             guard let self = self else { return }
+
             switch result {
             case .success(let followers):
-                self.followers = followers
+                //one network call get's us 100 followers per one call, if followers<100 we switch hasMoreFollowers into false
+                //when we will scroll to the buttom, func "scrollViewDidEndDragging" would'n make any more network call
+                if followers.count < 100 { self.hasMoreFollowers = false }
+                //every time we make a network call, we append next 100 followers into our array self.followers
+                self.followers.append(contentsOf: followers)
                 self.updateData()
 
             case .failure(let error):
@@ -78,3 +85,20 @@ class FollowersListViewController: UIViewController {
         }
     }
 }
+
+extension FollowersListViewController: UICollectionViewDelegate {
+    //it's waiting for us to end dragging and then calls
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+
+        if offsetY > contentHeight - height {
+            //if user has more followers then we go on and continue, if no return
+            guard hasMoreFollowers else { return }
+            page += 1
+            getfollowers(username: username, page: page)
+        }
+    }
+}
+
