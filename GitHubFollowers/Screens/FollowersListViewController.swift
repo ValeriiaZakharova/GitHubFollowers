@@ -17,14 +17,16 @@ class FollowersListViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        NetworkManager.shared.getFollowers(for: username!, page: 1) { (follwers, errorMessage) in
-            guard let follwers = follwers else {
-                self.presentAlertViewController(title: "Bad stuff happened", message: errorMessage!, buttonTitle: "ok")
-                return
-            }
+    NetworkManager.shared.getFollowers(for: username!, page: 1) { result in
 
-            print("Followers.count = \(follwers.count)")
-            print(follwers)
+        switch result {
+        case .success(let followers):
+            print("Followers.count = \(followers.count)")
+            print(followers)
+
+        case .failure(let error):
+            self.presentAlertViewController(title: "Bad stuff happened", message: error.rawValue, buttonTitle: "ok")
+            }
         }
     }
 
