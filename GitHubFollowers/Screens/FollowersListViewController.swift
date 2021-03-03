@@ -58,6 +58,15 @@ class FollowersListViewController: UIViewController {
                 if followers.count < 100 { self.hasMoreFollowers = false }
                 //every time we make a network call, we append next 100 followers into our array self.followers
                 self.followers.append(contentsOf: followers)
+
+                //for users with 0 followers
+                if self.followers.isEmpty {
+                    let message = "This user doesn't have any followers. Go follow them 😀"
+                    DispatchQueue.main.async {
+                        self.showEmptyStateView(with: message, in: self.view)
+                        return
+                    }
+                }
                 self.updateData()
 
             case .failure(let error):

@@ -9,6 +9,7 @@ import UIKit
 
 extension UIViewController {
 
+    // MARK: - Shows custom Alert
     func presentAlertViewController(title: String, message: String, buttonTitle: String) {
         DispatchQueue.main.async {
             let alertVc = GFAlertViewController(title: title, message: message, buttontitle: buttonTitle)
@@ -18,6 +19,7 @@ extension UIViewController {
         }
     }
 
+    // MARK: - Shows Spinner
     func showLoadingView() {
         containerView = UIView(frame: view.bounds)
         view.addSubview(containerView)
@@ -42,11 +44,19 @@ extension UIViewController {
         activityIndicator.startAnimating()
     }
 
+    // MARK: - Dismiss Spinner
     func dismissLoadingView() {
         DispatchQueue.main.async {
             containerView.removeFromSuperview()
             containerView = nil
         }
+    }
+
+    // MARK: - Shows Empty State View
+    func showEmptyStateView(with message: String, in view: UIView) {
+        let emptyStateView = EmptyStateView(message: message)
+        emptyStateView.frame = view.bounds
+        view.addSubview(emptyStateView)
     }
 }
 
