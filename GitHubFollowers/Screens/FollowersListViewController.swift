@@ -8,30 +8,146 @@
 import UIKit
 
 class FollowersListViewController: UIViewController {
+    enum Section { case main }
 
-    var username: String?
+    var username: String!
+
+    var followers: [Follower] = []
+
+    var filtredFollowers: [Follower] = []
+
+    var page = 1
+    var hasMoreFollowers = true
+
+    var collectionView: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.prefersLargeTitles = true
-
-    NetworkManager.shared.getFollowers(for: username!, page: 1) { result in
-
-        switch result {
-        case .success(let followers):
-            print("Followers.count = \(followers.count)")
-            print(followers)
-
-        case .failure(let error):
-            self.presentAlertViewController(title: "Bad stuff happened", message: error.rawValue, buttonTitle: "ok")
-            }
-        }
+        configureViewController()
+        configureCollectionview()
+        getfollowers(username: username, page: page)
+        configureDataSource()
+        configureSearchController()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+}
+
+// MARK: - Private
+private extension FollowersListViewController {
+    func configureViewController() {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+
+    func configureCollectionview() {
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
+        view.addSubview(collectionView)
+        collectionView.delegate = self
+        collectionView.backgroundColor = .systemBackground
+        collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
+    }
+
+    func configureSearchController() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+
+        searchController.searchBar.placeholder = "Search for a username"
+        searchController.obscuresBackgroundDuringPresentation = false
+        //add our search controller to navigation bar
+        navigationItem.searchController = searchController
+    }
+
+    func getfollowers(username: String, page: Int) {
+        //show spinner
+        showLoadingView()
+        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
+            guard let self = self else { return }
+            self.dismissLoadingView()
+            switch result {
+            case .success(let followers):
+                //one network call get's us 100 followers per one call, if followers<100 we switch hasMoreFollowers into false
+                //when we will scroll to the buttom, func "scrollViewDidEndDragging" would'n make any more network call
+                if followers.count < 100 { self.hasMoreFollowers = false }
+                //every time we make a network call, we append next 100 followers into our array self.followers
+                self.followers.append(contentsOf: followers)
+
+                //for users with 0 followers
+                if self.followers.isEmpty {
+                    let message = "This user doesn't have any followers. Go follow them 😀"
+                    DispatchQueue.main.async {
+                        self.showEmptyStateView(with: message, in: self.view)
+                        return
+                    }
+                }
+                self.updateData(on: self.followers)
+
+            case .failure(let error):
+                self.presentAlertViewController(title: "Bad stuff happened", message: error.rawValue, buttonTitle: "ok")
+            }
+        }
+    }
+
+    func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.reuseID, for: indexPath) as! FollowerCell
+            cell.set(follower: follower)
+            return cell
+        })
+    }
+
+    func updateData(on followers: [Follower]) {
+        //create snapshot
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
+        //added our section to snapshot
+        snapshot.appendSections([.main])
+        //added our followers to snapshot
+        snapshot.appendItems(followers)
+        // apply snapshot to our dataSourse
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+extension FollowersListViewController: UICollectionViewDelegate {
+    //it's waiting for us to end dragging and then calls
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+
+        if offsetY > contentHeight - height {
+            //if user has more followers then we go on and continue, if no return
+            guard hasMoreFollowers else { return }
+            page += 1
+            getfollowers(username: username, page: page)
+        }
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+extension FollowersListViewController: UISearchResultsUpdating {
+    //if I change something in search bar it's letting me now
+    func updateSearchResults(for searchController: UISearchController) {
+        //check if we have text in search bar and it's not empty
+        guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        //$0 - each item in the followers array (one follower)
+        //check if followers array contains our filter and put it in a filtredFollowers array
+        filtredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased())}
+        updateData(on: filtredFollowers)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension FollowersListViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        updateData(on: followers)
     }
 }
