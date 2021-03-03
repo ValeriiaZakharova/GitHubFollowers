@@ -8,11 +8,14 @@
 import UIKit
 
 class FollowersListViewController: UIViewController {
-
     enum Section { case main }
 
     var username: String!
+
     var followers: [Follower] = []
+
+    var filtredFollowers: [Follower] = []
+
     var page = 1
     var hasMoreFollowers = true
 
@@ -25,13 +28,17 @@ class FollowersListViewController: UIViewController {
         configureCollectionview()
         getfollowers(username: username, page: page)
         configureDataSource()
+        configureSearchController()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
+}
 
+// MARK: - Private
+private extension FollowersListViewController {
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -43,6 +50,17 @@ class FollowersListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
+    }
+
+    func configureSearchController() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+
+        searchController.searchBar.placeholder = "Search for a username"
+        searchController.obscuresBackgroundDuringPresentation = false
+        //add our search controller to navigation bar
+        navigationItem.searchController = searchController
     }
 
     func getfollowers(username: String, page: Int) {
@@ -67,7 +85,7 @@ class FollowersListViewController: UIViewController {
                         return
                     }
                 }
-                self.updateData()
+                self.updateData(on: self.followers)
 
             case .failure(let error):
                 self.presentAlertViewController(title: "Bad stuff happened", message: error.rawValue, buttonTitle: "ok")
@@ -83,7 +101,7 @@ class FollowersListViewController: UIViewController {
         })
     }
 
-    func updateData() {
+    func updateData(on followers: [Follower]) {
         //create snapshot
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
         //added our section to snapshot
@@ -97,6 +115,7 @@ class FollowersListViewController: UIViewController {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension FollowersListViewController: UICollectionViewDelegate {
     //it's waiting for us to end dragging and then calls
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -113,3 +132,22 @@ extension FollowersListViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UISearchResultsUpdating
+extension FollowersListViewController: UISearchResultsUpdating {
+    //if I change something in search bar it's letting me now
+    func updateSearchResults(for searchController: UISearchController) {
+        //check if we have text in search bar and it's not empty
+        guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        //$0 - each item in the followers array (one follower)
+        //check if followers array contains our filter and put it in a filtredFollowers array
+        filtredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased())}
+        updateData(on: filtredFollowers)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension FollowersListViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        updateData(on: followers)
+    }
+}
