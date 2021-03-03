@@ -46,9 +46,11 @@ class FollowersListViewController: UIViewController {
     }
 
     func getfollowers(username: String, page: Int) {
+        //show spinner
+        showLoadingView()
         NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
             guard let self = self else { return }
-
+            self.dismissLoadingView()
             switch result {
             case .success(let followers):
                 //one network call get's us 100 followers per one call, if followers<100 we switch hasMoreFollowers into false
