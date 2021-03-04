@@ -26,6 +26,7 @@
 		CFC3BA3325781D26004AC221 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC3BA3225781D26004AC221 /* SearchViewController.swift */; };
 		CFC3BA3625781D81004AC221 /* FavoritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC3BA3525781D81004AC221 /* FavoritesListViewController.swift */; };
 		CFC67564259E2A6400DC784E /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC67563259E2A6400DC784E /* FollowersListViewController.swift */; };
+		CFD84DB625F1100500235CFA /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD84DB525F1100500235CFA /* UserInfoViewController.swift */; };
 		CFE47A0E25DEB918000F4A58 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE47A0D25DEB918000F4A58 /* Follower.swift */; };
 		CFE47A1125DEBA28000F4A58 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE47A1025DEBA28000F4A58 /* User.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		CFC3BA3225781D26004AC221 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CFC3BA3525781D81004AC221 /* FavoritesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewController.swift; sourceTree = "<group>"; };
 		CFC67563259E2A6400DC784E /* FollowersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersListViewController.swift; sourceTree = "<group>"; };
+		CFD84DB525F1100500235CFA /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		CFE47A0D25DEB918000F4A58 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
 		CFE47A1025DEBA28000F4A58 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 				CFC3BA3225781D26004AC221 /* SearchViewController.swift */,
 				CFC3BA3525781D81004AC221 /* FavoritesListViewController.swift */,
 				CFC67563259E2A6400DC784E /* FollowersListViewController.swift */,
+				CFD84DB525F1100500235CFA /* UserInfoViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				CFC1FF2E25EE73D80029011B /* AvatarImageView.swift in Sources */,
 				CFC1FF1E25EE43790029011B /* NetworkManager.swift in Sources */,
 				CFC3BA1C2577FF0D004AC221 /* AppDelegate.swift in Sources */,
+				CFD84DB625F1100500235CFA /* UserInfoViewController.swift in Sources */,
 				CFC3BA3625781D81004AC221 /* FavoritesListViewController.swift in Sources */,
 				CFC3BA1E2577FF0D004AC221 /* SceneDelegate.swift in Sources */,
 			);

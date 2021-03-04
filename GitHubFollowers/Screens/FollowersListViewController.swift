@@ -18,6 +18,8 @@ class FollowersListViewController: UIViewController {
 
     var page = 1
     var hasMoreFollowers = true
+    //show us if we searching thrue followers or not, false by defults
+    var isSearching = false
 
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
@@ -130,6 +132,17 @@ extension FollowersListViewController: UICollectionViewDelegate {
             getfollowers(username: username, page: page)
         }
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //detect which array we should use when we tapped on the follower
+        let activeArray = isSearching ? filtredFollowers : followers
+        let follower = activeArray[indexPath.item]
+
+        let viewController = UserInfoViewController()
+        viewController.username = follower.login
+        let navigationController = UINavigationController(rootViewController: viewController)
+        present(navigationController, animated: true)
+    }
 }
 
 // MARK: - UISearchResultsUpdating
@@ -138,6 +151,8 @@ extension FollowersListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         //check if we have text in search bar and it's not empty
         guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        //if we have filter we start searching
+        isSearching = true
         //$0 - each item in the followers array (one follower)
         //check if followers array contains our filter and put it in a filtredFollowers array
         filtredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased())}
@@ -148,6 +163,8 @@ extension FollowersListViewController: UISearchResultsUpdating {
 // MARK: - UISearchBarDelegate
 extension FollowersListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        //cancel button tupped
+        isSearching = false
         updateData(on: followers)
     }
 }
