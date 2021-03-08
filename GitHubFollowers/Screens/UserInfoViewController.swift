@@ -14,7 +14,7 @@ class UserInfoViewController: UIViewController {
         static let itemHeight: CGFloat = 140
     }
 
-    //holder for child viewController - UserInfoHeaderViewController
+    //holders for child viewControllers - UserInfoHeaderViewController,
     private let headerView = UIView()
     private let itemViewOne = UIView()
     private let itemViewTwo = UIView()
