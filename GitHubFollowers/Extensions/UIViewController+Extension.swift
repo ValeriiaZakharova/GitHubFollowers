@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 extension UIViewController {
 
@@ -57,6 +58,13 @@ extension UIViewController {
         let emptyStateView = EmptyStateView(message: message)
         emptyStateView.frame = view.bounds
         view.addSubview(emptyStateView)
+    }
+
+    // MARK: - Present Safari View Controller
+    func presentSafariViewController(with url: URL) {
+        let safariViewController = SFSafariViewController(url: url)
+        safariViewController.preferredControlTintColor = .systemGreen
+        present(safariViewController, animated: true)
     }
 }
 
