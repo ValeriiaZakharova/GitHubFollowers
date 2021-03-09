@@ -124,7 +124,32 @@ private extension FollowersListViewController {
     }
 
     @objc func addButtonTapped() {
-        print("add button tapped")
+        showLoadingView()
+
+        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+            guard let self = self else { return }
+            self.dismissLoadingView()
+
+            switch result {
+            case .success(let user):
+                //create follower object to get a login and an avatarUrl for fovorite user
+                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+
+                //add the user to the favorite, save to the userDefoults
+                //if the error is nil we are gonna present success
+                PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
+                    guard let error = error else {
+                        self?.presentAlertViewController(title: "Success!", message: "You have succesfully favorited this user 🎉", buttonTitle: "Ok")
+                        return
+                    }
+                    //if error is not nil
+                    self?.presentAlertViewController(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
+                }
+
+            case .failure(let error):
+                self.presentAlertViewController(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
+            }
+        }
     }
 }
 
