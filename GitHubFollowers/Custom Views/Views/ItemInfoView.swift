@@ -13,13 +13,13 @@ enum ItemInfoType {
 
 class ItemInfoView: UIView {
 
-    let symbolImageView = UIImageView()
-    let titleLebel = GFTitleLabel(textAlignment: .left, fontSize: 14)
-    let countLevel = GFTitleLabel(textAlignment: .center, fontSize: 14)
+    private let symbolImageView = UIImageView()
+    private let titleLebel = GFTitleLabel(textAlignment: .left, fontSize: 14)
+    private let countLevel = GFTitleLabel(textAlignment: .center, fontSize: 14)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        setupUI()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -42,12 +42,21 @@ class ItemInfoView: UIView {
         }
         countLevel.text = String(count)
     }
+}
 
-    private func configure() {
+private extension ItemInfoView {
+    func setupUI() {
+        setupViewHierarchy()
+        setupConstaints()
+    }
+    
+    func setupViewHierarchy() {
         addSubview(symbolImageView)
         addSubview(titleLebel)
         addSubview(countLevel)
+    }
 
+    func setupConstaints() {
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
         symbolImageView.contentMode = .scaleAspectFill
         symbolImageView.tintColor = .label
@@ -70,5 +79,3 @@ class ItemInfoView: UIView {
         ])
     }
 }
-
-

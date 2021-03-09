@@ -17,6 +17,7 @@
 		CF5287F625F13D6400A92EB4 /* SecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5287F525F13D6400A92EB4 /* SecondaryTitleLabel.swift */; };
 		CF5287F925F151CF00A92EB4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5287F825F151CF00A92EB4 /* Constants.swift */; };
 		CFB766BD25F5486500F465C6 /* ItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766BC25F5486500F465C6 /* ItemInfoView.swift */; };
+		CFB766C025F7645400F465C6 /* ItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766BF25F7645400F465C6 /* ItemInfoViewController.swift */; };
 		CFC1FF1E25EE43790029011B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1FF1D25EE43790029011B /* NetworkManager.swift */; };
 		CFC1FF2325EE5F5B0029011B /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1FF2225EE5F5B0029011B /* ErrorMessage.swift */; };
 		CFC1FF2B25EE733F0029011B /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1FF2A25EE733F0029011B /* FollowerCell.swift */; };
@@ -46,6 +47,7 @@
 		CF5287F525F13D6400A92EB4 /* SecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTitleLabel.swift; sourceTree = "<group>"; };
 		CF5287F825F151CF00A92EB4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CFB766BC25F5486500F465C6 /* ItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoView.swift; sourceTree = "<group>"; };
+		CFB766BF25F7645400F465C6 /* ItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoViewController.swift; sourceTree = "<group>"; };
 		CFC1FF1D25EE43790029011B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CFC1FF2225EE5F5B0029011B /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		CFC1FF2A25EE733F0029011B /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				CF3DBB3E25C840F100EF5695 /* GFAlertViewController.swift */,
 				CF5287F225F13CE900A92EB4 /* UserInfoHeaderViewController.swift */,
+				CFB766BF25F7645400F465C6 /* ItemInfoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				CF5287F625F13D6400A92EB4 /* SecondaryTitleLabel.swift in Sources */,
 				CFC3BA3625781D81004AC221 /* FavoritesListViewController.swift in Sources */,
 				CFC3BA1E2577FF0D004AC221 /* SceneDelegate.swift in Sources */,
+				CFB766C025F7645400F465C6 /* ItemInfoViewController.swift in Sources */,
 				CF5287F325F13CE900A92EB4 /* UserInfoHeaderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
