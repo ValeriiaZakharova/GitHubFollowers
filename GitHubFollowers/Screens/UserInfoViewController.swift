@@ -12,12 +12,14 @@ class UserInfoViewController: UIViewController {
     enum Constants {
         static let padding: CGFloat = 20
         static let itemHeight: CGFloat = 140
+        static let labelHeight: CGFloat = 18
     }
 
     //holders for child viewControllers - UserInfoHeaderViewController,
     private let headerView = UIView()
     private let itemViewOne = UIView()
     private let itemViewTwo = UIView()
+    private let dateLabel = GFBodyLabel(textAlignment: .center)
 
     private var itemViews: [UIView] = []
 
@@ -44,6 +46,7 @@ class UserInfoViewController: UIViewController {
                     self.add(childVC: UserInfoHeaderViewController(user: user), to: self.headerView)
                     self.add(childVC: RepoItemViewController(user: user), to: self.itemViewOne)
                     self.add(childVC: FollowerItemViewController(user: user), to: self.itemViewTwo)
+                    self.dateLabel.text = "GitHub since \(user.createdAt.convertToDisplayFormat())"
                 }
             case .failure(let error):
                 self.presentAlertViewController(title: "Something went wrong", message: error.rawValue, buttonTitle: "ok")
@@ -74,7 +77,7 @@ private extension UserInfoViewController {
     }
 
     func setupUI() {
-        itemViews = [headerView, itemViewOne, itemViewTwo]
+        itemViews = [headerView, itemViewOne, itemViewTwo, dateLabel]
 
         for itemView in itemViews {
             view.addSubview(itemView)
@@ -93,7 +96,10 @@ private extension UserInfoViewController {
             itemViewOne.heightAnchor.constraint(equalToConstant: Constants.itemHeight),
 
             itemViewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor, constant: Constants.padding),
-            itemViewTwo.heightAnchor.constraint(equalToConstant: Constants.itemHeight)
+            itemViewTwo.heightAnchor.constraint(equalToConstant: Constants.itemHeight),
+
+            dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: Constants.padding),
+            dateLabel.heightAnchor.constraint(equalToConstant: Constants.labelHeight)
         ])
     }
 }
