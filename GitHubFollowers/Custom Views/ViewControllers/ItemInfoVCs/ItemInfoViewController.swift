@@ -16,6 +16,7 @@ class ItemInfoViewController: UIViewController {
     }
 
     var user : User!
+    weak var delegate: UserInfoViewControllerDelegate!
 
     let stackView = UIStackView()
     let itemInfoViewOne = ItemInfoView()
@@ -34,9 +35,17 @@ class ItemInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupActionButton()
     }
+
+    private func setupActionButton() {
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+    }
+
+    @objc func actionButtonTapped() {}
 }
 
+// MARK: - Private
 private extension ItemInfoViewController {
     func setupUI() {
         configureBackgroundView()

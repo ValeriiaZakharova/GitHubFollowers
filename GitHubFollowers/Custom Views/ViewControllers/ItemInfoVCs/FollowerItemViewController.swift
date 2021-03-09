@@ -16,6 +16,10 @@ class FollowerItemViewController: ItemInfoViewController {
         super.viewDidLoad()
         setupUI()
     }
+
+    override func actionButtonTapped() {
+        delegate.didTapGetFollowers(for: user)
+    }
 }
 
 private extension FollowerItemViewController {

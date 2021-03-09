@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol UserInfoViewControllerDelegate: class {
+    func didTapGitHubProfile(for user: User)
+    func didTapGetFollowers(for user: User)
+}
+
 class UserInfoViewController: UIViewController {
 
     enum Constants {
@@ -15,7 +20,7 @@ class UserInfoViewController: UIViewController {
         static let labelHeight: CGFloat = 18
     }
 
-    //holders for child viewControllers - UserInfoHeaderViewController,
+    //holders for child viewControllers - UserInfoHeaderViewController, RepoItemViewController, FollowerItemViewController
     private let headerView = UIView()
     private let itemViewOne = UIView()
     private let itemViewTwo = UIView()
@@ -24,6 +29,7 @@ class UserInfoViewController: UIViewController {
     private var itemViews: [UIView] = []
 
     var username: String!
+    weak var delegate: FollowerListViewControllerDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +47,8 @@ class UserInfoViewController: UIViewController {
 
             switch result {
             case .success(let user):
-                //add UserInfoHeaderViewController to our headerView
                 DispatchQueue.main.async {
-                    self.add(childVC: UserInfoHeaderViewController(user: user), to: self.headerView)
-                    self.add(childVC: RepoItemViewController(user: user), to: self.itemViewOne)
-                    self.add(childVC: FollowerItemViewController(user: user), to: self.itemViewTwo)
-                    self.dateLabel.text = "GitHub since \(user.createdAt.convertToDisplayFormat())"
+                    self.setupUIElements(with: user)
                 }
             case .failure(let error):
                 self.presentAlertViewController(title: "Something went wrong", message: error.rawValue, buttonTitle: "ok")
@@ -59,6 +61,20 @@ class UserInfoViewController: UIViewController {
         containerView.addSubview(childVC.view)
         childVC.view.frame = containerView.bounds
         childVC.didMove(toParent: self)
+    }
+
+    private func setupUIElements(with user: User) {
+        let repoItemViewController = RepoItemViewController(user: user)
+        repoItemViewController.delegate = self
+
+        let followerItemViewController = FollowerItemViewController(user: user)
+        followerItemViewController.delegate = self
+
+        //add childviewcontrollers to our holdersView - headerView, itemViewOne, itemViewTwo
+        self.add(childVC: UserInfoHeaderViewController(user: user), to: self.headerView)
+        self.add(childVC: repoItemViewController, to: self.itemViewOne)
+        self.add(childVC: followerItemViewController, to: self.itemViewTwo)
+        self.dateLabel.text = "GitHub since \(user.createdAt.convertToDisplayFormat())"
     }
 }
 
@@ -101,5 +117,30 @@ private extension UserInfoViewController {
             dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: Constants.padding),
             dateLabel.heightAnchor.constraint(equalToConstant: Constants.labelHeight)
         ])
+    }
+}
+
+// MARK: - UserInfoViewControllerDelegate
+extension UserInfoViewController: UserInfoViewControllerDelegate {
+    func didTapGitHubProfile(for user: User) {
+        //show safariview controller
+        guard let url = URL(string: user.htmlUrl) else {
+            presentAlertViewController(title: "Invalid URL", message: "The url attached to this user is invalid.", buttonTitle: "OK")
+            return
+        }
+        presentSafariViewController(with: url)
+    }
+
+    func didTapGetFollowers(for user: User) {
+        //dismiss
+        //tell follower list screen the new user
+
+        //check if user has any followers, if not show an alert
+        guard user.followers != 0 else {
+            presentAlertViewController(title: "No followers", message: "This user fas no followers. What a shame 😕", buttonTitle: "So sad")
+            return
+        }
+        delegate.didRquestFollowers(for: user.login)
+        dismissVC()
     }
 }

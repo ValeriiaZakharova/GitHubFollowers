@@ -16,8 +16,13 @@ class RepoItemViewController: ItemInfoViewController {
         super.viewDidLoad()
         setupUI()
     }
+
+    override func actionButtonTapped() {
+        delegate.didTapGitHubProfile(for: user)
+    }
 }
 
+// MARK: - Private
 private extension RepoItemViewController {
     func setupUI() {
         setupContent()

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FollowerListViewControllerDelegate: class {
+    func didRquestFollowers(for username: String)
+}
+
 class FollowersListViewController: UIViewController {
     enum Section { case main }
 
@@ -140,6 +144,7 @@ extension FollowersListViewController: UICollectionViewDelegate {
 
         let viewController = UserInfoViewController()
         viewController.username = follower.login
+        viewController.delegate = self
         let navigationController = UINavigationController(rootViewController: viewController)
         present(navigationController, animated: true)
     }
@@ -168,3 +173,22 @@ extension FollowersListViewController: UISearchBarDelegate {
         updateData(on: followers)
     }
 }
+
+// MARK: - FollowerListViewControllerDelegate
+extension FollowersListViewController: FollowerListViewControllerDelegate {
+    func didRquestFollowers(for username: String) {
+        // reset the screen with new user
+        self.username = username
+        title = username
+        page = 1
+        followers.removeAll()
+        filtredFollowers.removeAll()
+        //return collection view to the top
+        collectionView.setContentOffset(.zero, animated: true)
+        //create network call for new user
+        getfollowers(username: username, page: page)
+    }
+}
+
+// Delegate & Protocol - communication one-to-one - setting communication pattern beetwen 2 views
+// Notifications & Observers - communication one-to-many
