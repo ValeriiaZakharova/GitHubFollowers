@@ -15,10 +15,21 @@ class ItemInfoViewController: UIViewController {
         static let buttonHeight: CGFloat = 44
     }
 
-    private let stackView = UIStackView()
-    private let itemInfoViewOne = ItemInfoView()
-    private let itemInfoViewTwo = ItemInfoView()
-    private let actionButton = GFButton()
+    var user : User!
+
+    let stackView = UIStackView()
+    let itemInfoViewOne = ItemInfoView()
+    let itemInfoViewTwo = ItemInfoView()
+    let actionButton = GFButton()
+
+    init(user: User) {
+        super.init(nibName: nil, bundle: nil)
+        self.user = user
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +63,7 @@ private extension ItemInfoViewController {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.padding),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.padding),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.padding),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.padding),
             stackView.heightAnchor.constraint(equalToConstant: Constants.stackViewHeight),
 
             actionButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.padding),

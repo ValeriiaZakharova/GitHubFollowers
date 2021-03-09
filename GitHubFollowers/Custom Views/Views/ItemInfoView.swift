@@ -49,7 +49,7 @@ private extension ItemInfoView {
         setupViewHierarchy()
         setupConstaints()
     }
-    
+
     func setupViewHierarchy() {
         addSubview(symbolImageView)
         addSubview(titleLebel)
