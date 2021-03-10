@@ -22,6 +22,8 @@
 		CFB766C625F79C1900F465C6 /* FollowerItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766C525F79C1900F465C6 /* FollowerItemViewController.swift */; };
 		CFB766CB25F7A52F00F465C6 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766CA25F7A52F00F465C6 /* Date+Extension.swift */; };
 		CFB766CE25F7A57300F465C6 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766CD25F7A57300F465C6 /* String+extension.swift */; };
+		CFB766D525F8068C00F465C6 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766D425F8068C00F465C6 /* PersistenceManager.swift */; };
+		CFB766D825F81F5200F465C6 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766D725F81F5200F465C6 /* FavoriteCell.swift */; };
 		CFC1FF1E25EE43790029011B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1FF1D25EE43790029011B /* NetworkManager.swift */; };
 		CFC1FF2325EE5F5B0029011B /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1FF2225EE5F5B0029011B /* ErrorMessage.swift */; };
 		CFC1FF2B25EE733F0029011B /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1FF2A25EE733F0029011B /* FollowerCell.swift */; };
@@ -56,6 +58,8 @@
 		CFB766C525F79C1900F465C6 /* FollowerItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerItemViewController.swift; sourceTree = "<group>"; };
 		CFB766CA25F7A52F00F465C6 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		CFB766CD25F7A57300F465C6 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
+		CFB766D425F8068C00F465C6 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		CFB766D725F81F5200F465C6 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		CFC1FF1D25EE43790029011B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CFC1FF2225EE5F5B0029011B /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		CFC1FF2A25EE733F0029011B /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				CFC1FF1D25EE43790029011B /* NetworkManager.swift */,
+				CFB766D425F8068C00F465C6 /* PersistenceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				CFC1FF2A25EE733F0029011B /* FollowerCell.swift */,
+				CFB766D725F81F5200F465C6 /* FavoriteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -345,6 +351,7 @@
 				CFC67564259E2A6400DC784E /* FollowersListViewController.swift in Sources */,
 				CFB766C625F79C1900F465C6 /* FollowerItemViewController.swift in Sources */,
 				CFC1FF2B25EE733F0029011B /* FollowerCell.swift in Sources */,
+				CFB766D825F81F5200F465C6 /* FavoriteCell.swift in Sources */,
 				CFB766BD25F5486500F465C6 /* ItemInfoView.swift in Sources */,
 				CFC1FF2325EE5F5B0029011B /* ErrorMessage.swift in Sources */,
 				CF3DBB3625C83F6E00EF5695 /* GFBodyLabel.swift in Sources */,
@@ -352,6 +359,7 @@
 				CF3DBB3325C83DAC00EF5695 /* GFTitleLabel.swift in Sources */,
 				CFC1FF2E25EE73D80029011B /* AvatarImageView.swift in Sources */,
 				CFC1FF1E25EE43790029011B /* NetworkManager.swift in Sources */,
+				CFB766D525F8068C00F465C6 /* PersistenceManager.swift in Sources */,
 				CFC3BA1C2577FF0D004AC221 /* AppDelegate.swift in Sources */,
 				CFD84DB625F1100500235CFA /* UserInfoViewController.swift in Sources */,
 				CF5287F625F13D6400A92EB4 /* SecondaryTitleLabel.swift in Sources */,
