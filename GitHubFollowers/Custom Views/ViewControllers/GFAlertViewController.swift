@@ -10,7 +10,6 @@ import UIKit
 class GFAlertViewController: UIViewController {
 
     // MARK: - Constants
-
     private enum Constants {
         static let padding: CGFloat = 20
     }

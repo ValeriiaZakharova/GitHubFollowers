@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF1FB47C25F8ECAF00CD3478 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1FB47B25F8ECAF00CD3478 /* TabBarController.swift */; };
 		CF3D6A3025827A3A008F82F7 /* GFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D6A2F25827A3A008F82F7 /* GFButton.swift */; };
 		CF3D6A3325827D9C008F82F7 /* GFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D6A3225827D9C008F82F7 /* GFTextField.swift */; };
 		CF3DBB3325C83DAC00EF5695 /* GFTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3DBB3225C83DAC00EF5695 /* GFTitleLabel.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CF1FB47B25F8ECAF00CD3478 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CF3D6A2F25827A3A008F82F7 /* GFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFButton.swift; sourceTree = "<group>"; };
 		CF3D6A3225827D9C008F82F7 /* GFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTextField.swift; sourceTree = "<group>"; };
 		CF3DBB3225C83DAC00EF5695 /* GFTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTitleLabel.swift; sourceTree = "<group>"; };
@@ -91,6 +93,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF1FB47A25F8EC7000CD3478 /* TabbarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CF1FB47B25F8ECAF00CD3478 /* TabBarController.swift */,
+			);
+			path = TabbarControllers;
+			sourceTree = "<group>";
+		};
 		CF3DBB4525C8605600EF5695 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +115,7 @@
 		CF3DBB4725C860BF00EF5695 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				CF1FB47A25F8EC7000CD3478 /* TabbarControllers */,
 				CFC1FF3C25EFD9DB0029011B /* Labels */,
 				CFC1FF3A25EFD9560029011B /* TextFields */,
 				CFC1FF3925EFD9440029011B /* Buttons */,
@@ -338,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFE47A1125DEBA28000F4A58 /* User.swift in Sources */,
+				CF1FB47C25F8ECAF00CD3478 /* TabBarController.swift in Sources */,
 				CF3DBB3F25C840F100EF5695 /* GFAlertViewController.swift in Sources */,
 				CFC1FF4025EFDA540029011B /* EmptyStateView.swift in Sources */,
 				CF3DBB4225C856B200EF5695 /* UIViewController+Extension.swift in Sources */,
