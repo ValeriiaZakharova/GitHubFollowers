@@ -9,8 +9,8 @@ import UIKit
 
 class EmptyStateView: UIView {
 
-    let messageLabel = GFTitleLabel(textAlignment: .center, fontSize: 28)
-    let logoImageView = UIImageView()
+    private let messageLabel = GFTitleLabel(textAlignment: .center, fontSize: 28)
+    private let logoImageView = UIImageView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,10 +21,9 @@ class EmptyStateView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init(message: String) {
-        super.init(frame: .zero)
+    convenience init(message: String) {
+        self.init(frame: .zero)
         messageLabel.text = message
-        configure()
     }
 
     private func configure() {
