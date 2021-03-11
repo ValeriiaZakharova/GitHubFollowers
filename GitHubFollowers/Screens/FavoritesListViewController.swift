@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesListViewController: UIViewController {
+class FavoritesListViewController: DataLoadingViewController {
 
     enum Constants {
         static let title = "Favorites"

@@ -12,7 +12,7 @@ protocol UserInfoViewControllerDelegate: class {
     func didTapGetFollowers(for user: User)
 }
 
-class UserInfoViewController: UIViewController {
+class UserInfoViewController: DataLoadingViewController {
 
     enum Constants {
         static let padding: CGFloat = 20
@@ -74,7 +74,7 @@ class UserInfoViewController: UIViewController {
         self.add(childVC: UserInfoHeaderViewController(user: user), to: self.headerView)
         self.add(childVC: repoItemViewController, to: self.itemViewOne)
         self.add(childVC: followerItemViewController, to: self.itemViewTwo)
-        self.dateLabel.text = "GitHub since \(user.createdAt.convertToDisplayFormat())"
+        self.dateLabel.text = "GitHub since \(user.createdAt.convertToMonthYearFormat())"
     }
 }
 
@@ -132,9 +132,6 @@ extension UserInfoViewController: UserInfoViewControllerDelegate {
     }
 
     func didTapGetFollowers(for user: User) {
-        //dismiss
-        //tell follower list screen the new user
-
         //check if user has any followers, if not show an alert
         guard user.followers != 0 else {
             presentAlertViewController(title: "No followers", message: "This user fas no followers. What a shame 😕", buttonTitle: "So sad")

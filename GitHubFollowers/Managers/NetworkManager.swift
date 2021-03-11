@@ -83,12 +83,45 @@ class NetworkManager {
                 let decoder = JSONDecoder()
                 //convert our variable from snakecase
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.dateDecodingStrategy = .iso8601
                 let user = try decoder.decode(User.self, from: data)
                 completion(.success(user))
             } catch {
                 completion(.failure(.invalidData))
             }
         }
+        task.resume()
+    }
+
+    func downloadImage(from urlString: String, complition: @escaping (UIImage?) -> Void) {
+        // conwert String to NSString
+        let cacheKey = NSString(string: urlString)
+        // check if our image is already in cache
+        if let image = cache.object(forKey: cacheKey) {
+            complition(image)
+            return
+        }
+        guard let url = URL(string: urlString) else {
+            complition(nil)
+            return
+        }
+        // make call for image
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+
+            guard let self = self,
+                  error == nil,
+                  let response = response as? HTTPURLResponse,
+                  response.statusCode == 200,
+                  let data = data,
+                  let image = UIImage(data: data) else {
+                complition(nil)
+                return
+            }
+
+            self.cache.setObject(image, forKey: cacheKey)
+            complition(image)
+        }
+
         task.resume()
     }
 }

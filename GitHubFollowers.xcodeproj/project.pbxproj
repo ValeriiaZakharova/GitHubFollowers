@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CF1FB47C25F8ECAF00CD3478 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1FB47B25F8ECAF00CD3478 /* TabBarController.swift */; };
 		CF1FB48025FA01ED00CD3478 /* AlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1FB47F25FA01ED00CD3478 /* AlertContainerView.swift */; };
+		CF1FB48A25FA1EDD00CD3478 /* DataLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1FB48925FA1EDD00CD3478 /* DataLoadingViewController.swift */; };
 		CF3D6A3025827A3A008F82F7 /* GFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D6A2F25827A3A008F82F7 /* GFButton.swift */; };
 		CF3D6A3325827D9C008F82F7 /* GFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D6A3225827D9C008F82F7 /* GFTextField.swift */; };
 		CF3DBB3325C83DAC00EF5695 /* GFTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3DBB3225C83DAC00EF5695 /* GFTitleLabel.swift */; };
@@ -23,7 +24,6 @@
 		CFB766C325F782EE00F465C6 /* RepoItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766C225F782EE00F465C6 /* RepoItemViewController.swift */; };
 		CFB766C625F79C1900F465C6 /* FollowerItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766C525F79C1900F465C6 /* FollowerItemViewController.swift */; };
 		CFB766CB25F7A52F00F465C6 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766CA25F7A52F00F465C6 /* Date+Extension.swift */; };
-		CFB766CE25F7A57300F465C6 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766CD25F7A57300F465C6 /* String+extension.swift */; };
 		CFB766D525F8068C00F465C6 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766D425F8068C00F465C6 /* PersistenceManager.swift */; };
 		CFB766D825F81F5200F465C6 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766D725F81F5200F465C6 /* FavoriteCell.swift */; };
 		CFC1FF1E25EE43790029011B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1FF1D25EE43790029011B /* NetworkManager.swift */; };
@@ -47,6 +47,7 @@
 /* Begin PBXFileReference section */
 		CF1FB47B25F8ECAF00CD3478 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CF1FB47F25FA01ED00CD3478 /* AlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContainerView.swift; sourceTree = "<group>"; };
+		CF1FB48925FA1EDD00CD3478 /* DataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadingViewController.swift; sourceTree = "<group>"; };
 		CF3D6A2F25827A3A008F82F7 /* GFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFButton.swift; sourceTree = "<group>"; };
 		CF3D6A3225827D9C008F82F7 /* GFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTextField.swift; sourceTree = "<group>"; };
 		CF3DBB3225C83DAC00EF5695 /* GFTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTitleLabel.swift; sourceTree = "<group>"; };
@@ -204,6 +205,7 @@
 				CFB766C825F79D1E00F465C6 /* ItemInfoVCs */,
 				CF3DBB3E25C840F100EF5695 /* GFAlertViewController.swift */,
 				CF5287F225F13CE900A92EB4 /* UserInfoHeaderViewController.swift */,
+				CF1FB48925FA1EDD00CD3478 /* DataLoadingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -362,7 +364,7 @@
 				CFC1FF3225EEA4FC0029011B /* UIHelper.swift in Sources */,
 				CF3D6A3025827A3A008F82F7 /* GFButton.swift in Sources */,
 				CFB766C325F782EE00F465C6 /* RepoItemViewController.swift in Sources */,
-				CFB766CE25F7A57300F465C6 /* String+extension.swift in Sources */,
+				CF1FB48A25FA1EDD00CD3478 /* DataLoadingViewController.swift in Sources */,
 				CFC67564259E2A6400DC784E /* FollowersListViewController.swift in Sources */,
 				CFB766C625F79C1900F465C6 /* FollowerItemViewController.swift in Sources */,
 				CFC1FF2B25EE733F0029011B /* FollowerCell.swift in Sources */,

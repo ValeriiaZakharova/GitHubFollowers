@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// we don't need this file any more we are using  dateDecodingStrategy = .iso8601 
 extension String {
     func convertToDate() -> Date? {
         let dateFormatter = DateFormatter()
