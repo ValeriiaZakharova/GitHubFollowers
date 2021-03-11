@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CF1FB47C25F8ECAF00CD3478 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1FB47B25F8ECAF00CD3478 /* TabBarController.swift */; };
+		CF1FB48025FA01ED00CD3478 /* AlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1FB47F25FA01ED00CD3478 /* AlertContainerView.swift */; };
 		CF3D6A3025827A3A008F82F7 /* GFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D6A2F25827A3A008F82F7 /* GFButton.swift */; };
 		CF3D6A3325827D9C008F82F7 /* GFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D6A3225827D9C008F82F7 /* GFTextField.swift */; };
 		CF3DBB3325C83DAC00EF5695 /* GFTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3DBB3225C83DAC00EF5695 /* GFTitleLabel.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		CF1FB47B25F8ECAF00CD3478 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		CF1FB47F25FA01ED00CD3478 /* AlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContainerView.swift; sourceTree = "<group>"; };
 		CF3D6A2F25827A3A008F82F7 /* GFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFButton.swift; sourceTree = "<group>"; };
 		CF3D6A3225827D9C008F82F7 /* GFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTextField.swift; sourceTree = "<group>"; };
 		CF3DBB3225C83DAC00EF5695 /* GFTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTitleLabel.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			children = (
 				CFC1FF3F25EFDA540029011B /* EmptyStateView.swift */,
 				CFB766BC25F5486500F465C6 /* ItemInfoView.swift */,
+				CF1FB47F25FA01ED00CD3478 /* AlertContainerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				CFC1FF2E25EE73D80029011B /* AvatarImageView.swift in Sources */,
 				CFC1FF1E25EE43790029011B /* NetworkManager.swift in Sources */,
 				CFB766D525F8068C00F465C6 /* PersistenceManager.swift in Sources */,
+				CF1FB48025FA01ED00CD3478 /* AlertContainerView.swift in Sources */,
 				CFC3BA1C2577FF0D004AC221 /* AppDelegate.swift in Sources */,
 				CFD84DB625F1100500235CFA /* UserInfoViewController.swift in Sources */,
 				CF5287F625F13D6400A92EB4 /* SecondaryTitleLabel.swift in Sources */,
