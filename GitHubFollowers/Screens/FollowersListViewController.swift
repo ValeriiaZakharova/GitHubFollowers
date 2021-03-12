@@ -74,8 +74,6 @@ private extension FollowersListViewController {
     func configureSearchController() {
         let searchController = UISearchController()
         searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
-
         searchController.searchBar.placeholder = "Search for a username"
         searchController.obscuresBackgroundDuringPresentation = false
         //add our search controller to navigation bar
@@ -197,22 +195,18 @@ extension FollowersListViewController: UISearchResultsUpdating {
     //if I change something in search bar it's letting me now
     func updateSearchResults(for searchController: UISearchController) {
         //check if we have text in search bar and it's not empty
-        guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        guard let filter = searchController.searchBar.text, !filter.isEmpty else {
+            filtredFollowers.removeAll()
+            updateData(on: followers)
+            isSearching = false
+            return
+        }
         //if we have filter we start searching
         isSearching = true
         //$0 - each item in the followers array (one follower)
         //check if followers array contains our filter and put it in a filtredFollowers array
         filtredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased())}
         updateData(on: filtredFollowers)
-    }
-}
-
-// MARK: - UISearchBarDelegate
-extension FollowersListViewController: UISearchBarDelegate {
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        //cancel button tupped
-        isSearching = false
-        updateData(on: followers)
     }
 }
 

@@ -28,16 +28,16 @@ class ItemInfoView: UIView {
     func set(itemInfoType: ItemInfoType, withCount count: Int) {
         switch itemInfoType {
         case .repos:
-            symbolImageView.image = UIImage(systemName: SFSymbols.repos)
+            symbolImageView.image = SFSymbols.repos
             titleLebel.text = "Public repos"
         case .gists:
-            symbolImageView.image = UIImage(systemName: SFSymbols.gists)
+            symbolImageView.image = SFSymbols.gists
             titleLebel.text = "Public Gists"
         case .followers:
-            symbolImageView.image = UIImage(systemName: SFSymbols.followers)
+            symbolImageView.image = SFSymbols.followers
             titleLebel.text = "Followers"
         case .following:
-            symbolImageView.image = UIImage(systemName: SFSymbols.following)
+            symbolImageView.image = SFSymbols.following
             titleLebel.text = "Following"
         }
         countLevel.text = String(count)
