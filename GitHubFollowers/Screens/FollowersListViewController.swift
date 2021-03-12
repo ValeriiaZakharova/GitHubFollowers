@@ -24,6 +24,7 @@ class FollowersListViewController: DataLoadingViewController {
     var hasMoreFollowers = true
     //show us if we searching thrue followers or not, false by defults
     var isSearching = false
+    var isLoadingMoreFollowers = false
 
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
@@ -83,6 +84,7 @@ private extension FollowersListViewController {
     func getfollowers(username: String, page: Int) {
         //show spinner
         showLoadingView()
+        isLoadingMoreFollowers = true
         NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
             guard let self = self else { return }
             self.dismissLoadingView()
@@ -107,6 +109,7 @@ private extension FollowersListViewController {
             case .failure(let error):
                 self.presentAlertViewController(title: "Bad stuff happened", message: error.rawValue, buttonTitle: "ok")
             }
+            self.isLoadingMoreFollowers = false
         }
     }
 
@@ -170,8 +173,8 @@ extension FollowersListViewController: UICollectionViewDelegate {
         let height = scrollView.frame.size.height
 
         if offsetY > contentHeight - height {
-            //if user has more followers then we go on and continue, if no return
-            guard hasMoreFollowers else { return }
+            //if user has more followers and isloadingMoreFollowers is false then we go on and continue, if no return
+            guard hasMoreFollowers, !isLoadingMoreFollowers else { return }
             page += 1
             getfollowers(username: username, page: page)
         }
@@ -220,7 +223,7 @@ extension FollowersListViewController: FollowerListViewControllerDelegate {
         followers.removeAll()
         filtredFollowers.removeAll()
         //return collection view to the top
-        collectionView.setContentOffset(.zero, animated: true)
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
         //create network call for new user
         getfollowers(username: username, page: page)
     }
