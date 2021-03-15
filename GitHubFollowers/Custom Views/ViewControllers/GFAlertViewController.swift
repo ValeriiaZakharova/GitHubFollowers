@@ -51,9 +51,7 @@ private extension GFAlertViewController {
 
     func setupViewHierarhy() {
         view.addSubview(containerView)
-        containerView.addSubview(titleLabel)
-        containerView.addSubview(actionButton)
-        containerView.addSubview(messageLabel)
+        containerView.addSubviews(titleLabel, actionButton, messageLabel)
     }
 
     func setupContent() {

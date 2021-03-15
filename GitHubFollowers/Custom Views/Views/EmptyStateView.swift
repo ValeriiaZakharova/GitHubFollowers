@@ -32,8 +32,7 @@ class EmptyStateView: UIView {
     }
 
     func setupViewHierarhy() {
-        addSubview(messageLabel)
-        addSubview(logoImageView)
+        addSubviews(messageLabel, logoImageView)
     }
 
     func setupConstraints() {

@@ -51,9 +51,7 @@ private extension ItemInfoView {
     }
 
     func setupViewHierarchy() {
-        addSubview(symbolImageView)
-        addSubview(titleLebel)
-        addSubview(countLevel)
+        addSubviews(symbolImageView, titleLebel, countLevel)
     }
 
     func setupConstaints() {

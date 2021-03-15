@@ -54,9 +54,7 @@ private extension SearchViewController {
     }
 
     func setupViewHierarhy() {
-        view.addSubview(logoImageView)
-        view.addSubview(usernameTextfield)
-        view.addSubview(getUsersButton)
+        view.addSubviews(logoImageView, usernameTextfield, getUsersButton)
     }
 
     func setupContent() {

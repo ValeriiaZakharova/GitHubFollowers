@@ -45,8 +45,7 @@ private extension FavoriteCell {
     }
 
     func setupViewHierarchy() {
-        addSubview(avatarImageView)
-        addSubview(usernameLabel)
+        addSubviews(avatarImageView, usernameLabel)
     }
 
     func setupConstaints() {

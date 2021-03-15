@@ -59,8 +59,7 @@ private extension ItemInfoViewController {
     }
 
     func setupViewHierarchy() {
-        view.addSubview(stackView)
-        view.addSubview(actionButton)
+        view.addSubviews(stackView, actionButton)
         stackView.addArrangedSubview(itemInfoViewOne)
         stackView.addArrangedSubview(itemInfoViewTwo)
     }
