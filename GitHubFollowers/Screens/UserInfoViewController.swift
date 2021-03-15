@@ -17,7 +17,7 @@ class UserInfoViewController: DataLoadingViewController {
     enum Constants {
         static let padding: CGFloat = 20
         static let itemHeight: CGFloat = 140
-        static let labelHeight: CGFloat = 18
+        static let labelHeight: CGFloat = 50
     }
 
     //holders for child viewControllers - UserInfoHeaderViewController, RepoItemViewController, FollowerItemViewController
@@ -106,7 +106,7 @@ private extension UserInfoViewController {
 
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180),
+            headerView.heightAnchor.constraint(equalToConstant: 210),
 
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: Constants.padding),
             itemViewOne.heightAnchor.constraint(equalToConstant: Constants.itemHeight),
