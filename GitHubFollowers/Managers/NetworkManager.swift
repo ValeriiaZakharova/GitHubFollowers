@@ -16,7 +16,6 @@ class NetworkManager {
 
     private init() {}
 
-    //page - for network call from API
     //Result - enum that returns 2 cases - success or failure
     func getFollowers(for username: String, page: Int, completion: @escaping (Result<[Follower], ErrorMessage>) -> Void) {
         let endpoint = baseURL + "\(username)/followers?per_page=100&page=\(page)"
@@ -64,7 +63,6 @@ class NetworkManager {
         }
 
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            //usually this error come from bad internet connection, if something wrong with the network call you will get an error in response
             if let _ = error {
                 completion(.failure(.unabletoComplete))
             }
@@ -94,7 +92,6 @@ class NetworkManager {
     }
 
     func downloadImage(from urlString: String, complition: @escaping (UIImage?) -> Void) {
-        // conwert String to NSString
         let cacheKey = NSString(string: urlString)
         // check if our image is already in cache
         if let image = cache.object(forKey: cacheKey) {
@@ -105,9 +102,8 @@ class NetworkManager {
             complition(nil)
             return
         }
-        // make call for image
+        // make call to get an image
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-
             guard let self = self,
                   error == nil,
                   let response = response as? HTTPURLResponse,
@@ -121,7 +117,6 @@ class NetworkManager {
             self.cache.setObject(image, forKey: cacheKey)
             complition(image)
         }
-
         task.resume()
     }
 }

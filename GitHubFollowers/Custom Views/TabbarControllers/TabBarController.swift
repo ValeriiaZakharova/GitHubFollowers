@@ -11,7 +11,6 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //add color to the tabbar
         UITabBar.appearance().tintColor = .systemGreen
         //put searchNavController and favoritesNavController to the tabbar view controller
         viewControllers = [createSearchNavController(), createFavoritesNavController()]

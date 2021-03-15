@@ -21,6 +21,7 @@ class ItemInfoView: UIView {
         super.init(frame: frame)
         setupUI()
     }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -44,6 +45,7 @@ class ItemInfoView: UIView {
     }
 }
 
+// MARK: - Private
 private extension ItemInfoView {
     func setupUI() {
         setupViewHierarchy()

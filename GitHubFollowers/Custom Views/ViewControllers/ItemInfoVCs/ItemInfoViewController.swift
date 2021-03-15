@@ -8,6 +8,7 @@
 import UIKit
 
 class ItemInfoViewController: UIViewController {
+    // MARK: - Constants
     enum Constants {
         static let radius: CGFloat = 18
         static let padding: CGFloat = 20
@@ -34,13 +35,10 @@ class ItemInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupActionButton()
+        setupActions()
     }
 
-    private func setupActionButton() {
-        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
-    }
-
+    // MARK: - Actions
     @objc func actionButtonTapped() {}
 }
 
@@ -81,5 +79,9 @@ private extension ItemInfoViewController {
 
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
+    }
+
+    func setupActions() {
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
     }
 }

@@ -8,6 +8,8 @@
 import UIKit
 
 class FavoriteCell: UITableViewCell {
+
+    // MARK: - Private
     enum Constants {
         static let padding: CGFloat = 12
         static let widthHeight: CGFloat = 60
@@ -15,8 +17,8 @@ class FavoriteCell: UITableViewCell {
 
     static let reuseID = "FavoriteCell"
 
-    let avatarImageView = AvatarImageView(frame: .zero)
-    let usernameLabel = GFTitleLabel(textAlignment: .left, fontSize: 26)
+    private let avatarImageView = AvatarImageView(frame: .zero)
+    private let usernameLabel = GFTitleLabel(textAlignment: .left, fontSize: 26)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,13 +31,11 @@ class FavoriteCell: UITableViewCell {
 
     func set(favorite: Follower) {
         usernameLabel.text = favorite.login
-        NetworkManager.shared.downloadImage(from: favorite.avatarUrl) { [weak self] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async { self.avatarImageView.image = image }
-        }
+        avatarImageView.downloadImage(fromUrl: favorite.avatarUrl)
     }
 }
 
+// MARK: - Private
 private extension FavoriteCell {
     func setupUI() {
         setupViewHierarchy()

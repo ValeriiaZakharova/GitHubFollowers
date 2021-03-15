@@ -8,7 +8,6 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-
     // MARK: - Constants
     private enum Constants {
         static let buttonTitle = "Get Follovers"
@@ -20,12 +19,8 @@ class SearchViewController: UIViewController {
 
     // MARK: - Private properties
     private let logoImageView = UIImageView()
-
     private let usernameTextfield = GFTextField()
-
     private let getUsersButton = GFButton(backgroundColor: UIColor.systemGreen, title: Constants.buttonTitle)
-
-    private var logoImageTopConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,15 +37,14 @@ class SearchViewController: UIViewController {
 }
 
 // MARK: - Private
-
 private extension SearchViewController {
 
     func setupUI() {
         setupViewHierarhy()
         setupContent()
         setupConstraints()
-        usernameTextfield.delegate = self
         didTapActionButton()
+        usernameTextfield.delegate = self
     }
 
     func setupViewHierarhy() {
@@ -63,11 +57,10 @@ private extension SearchViewController {
 
     func setupConstraints() {
         let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
-        logoImageTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant)
-        logoImageTopConstraint.isActive = true
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 200),
             logoImageView.widthAnchor.constraint(equalToConstant: 200)

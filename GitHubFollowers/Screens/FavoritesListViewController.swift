@@ -9,6 +9,7 @@ import UIKit
 
 class FavoritesListViewController: DataLoadingViewController {
 
+    // MARK: - Constants
     enum Constants {
         static let title = "Favorites"
     }
@@ -32,17 +33,21 @@ class FavoritesListViewController: DataLoadingViewController {
             guard let self = self else { return }
             switch result {
             case .success(let favorites):
-                if favorites.isEmpty {
-                    self.showEmptyStateView(with: "No Favorites?\nAdd one on the follower screen.", in: self.view)
-                } else {
-                    self.favorites = favorites
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.view.bringSubviewToFront(self.tableView)
-                    }
-                }
+                self.updateUI(with: favorites)
             case .failure(let error):
                 self.presentAlertViewController(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok.")
+            }
+        }
+    }
+
+    private func updateUI(with favorites: [Follower]) {
+        if favorites.isEmpty {
+            self.showEmptyStateView(with: "No Favorites?\nAdd one on the follower screen.", in: self.view)
+        } else {
+            self.favorites = favorites
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.view.bringSubviewToFront(self.tableView)
             }
         }
     }
@@ -87,6 +92,7 @@ extension FavoritesListViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - Private
 private extension FavoritesListViewController {
     func setupUI() {
         configureViewController()
@@ -107,7 +113,6 @@ private extension FavoritesListViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
-
         tableView.removeExcessCells()
 
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseID)

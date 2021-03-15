@@ -13,14 +13,15 @@ protocol UserInfoViewControllerDelegate: class {
 
 class UserInfoViewController: DataLoadingViewController {
 
+    // MARK: - Constants
     enum Constants {
         static let padding: CGFloat = 20
         static let itemHeight: CGFloat = 140
         static let labelHeight: CGFloat = 50
     }
 
-    let scrollView = UIScrollView()
-    let contentView = UIView()
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
 
     //holders for child viewControllers - UserInfoHeaderViewController, RepoItemViewController, FollowerItemViewController
     private let headerView = UIView()
@@ -76,7 +77,6 @@ class UserInfoViewController: DataLoadingViewController {
 
 // MARK: - Private
 private extension UserInfoViewController {
-
     func setup() {
         configureViewController()
         configureScrollView()

@@ -10,20 +10,19 @@ import UIKit
 class FollowersListViewController: DataLoadingViewController {
     enum Section { case main }
 
+    private var collectionView: UICollectionView!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    
     var username: String!
-
     var followers: [Follower] = []
-
     var filtredFollowers: [Follower] = []
 
     var page = 1
     var hasMoreFollowers = true
-    //show us if we searching thrue followers or not, false by defults
+
+    //show us if we searching followers or not, false by defults
     var isSearching = false
     var isLoadingMoreFollowers = false
-
-    var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
 
     init(username: String) {
         super.init(nibName: nil, bundle: nil)
@@ -86,27 +85,31 @@ private extension FollowersListViewController {
             self.dismissLoadingView()
             switch result {
             case .success(let followers):
-                //one network call get's us 100 followers per one call, if followers<100 we switch hasMoreFollowers into false
-                //when we will scroll to the buttom, func "scrollViewDidEndDragging" would'n make any more network call
-                if followers.count < 100 { self.hasMoreFollowers = false }
-                //every time we make a network call, we append next 100 followers into our array self.followers
-                self.followers.append(contentsOf: followers)
-
-                //for users with 0 followers
-                if self.followers.isEmpty {
-                    let message = "This user doesn't have any followers. Go follow them 😀"
-                    DispatchQueue.main.async {
-                        self.showEmptyStateView(with: message, in: self.view)
-                        return
-                    }
-                }
-                self.updateData(on: self.followers)
+                self.updateUI(with: followers)
 
             case .failure(let error):
                 self.presentAlertViewController(title: "Bad stuff happened", message: error.rawValue, buttonTitle: "ok")
             }
             self.isLoadingMoreFollowers = false
         }
+    }
+
+    func updateUI(with followers: [Follower]) {
+        //one network call get's us 100 followers per one call, if followers<100 we switch hasMoreFollowers into false
+        //when we will scroll to the buttom, func "scrollViewDidEndDragging" would'n make any more network call
+        if followers.count < 100 { self.hasMoreFollowers = false }
+        //every time we make a network call, we append next 100 followers into our array self.followers
+        self.followers.append(contentsOf: followers)
+
+        //for users with 0 followers
+        if self.followers.isEmpty {
+            let message = "This user doesn't have any followers. Go follow them 😀"
+            DispatchQueue.main.async {
+                self.showEmptyStateView(with: message, in: self.view)
+                return
+            }
+        }
+        self.updateData(on: self.followers)
     }
 
     func configureDataSource() {
@@ -139,23 +142,26 @@ private extension FollowersListViewController {
 
             switch result {
             case .success(let user):
-                //create follower object to get a login and an avatarUrl for fovorite user
-                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
-
-                //add the user to the favorite, save to the userDefoults
-                //if the error is nil we are gonna present success
-                PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
-                    guard let error = error else {
-                        self?.presentAlertViewController(title: "Success!", message: "You have succesfully favorited this user 🎉", buttonTitle: "Ok")
-                        return
-                    }
-                    //if error is not nil
-                    self?.presentAlertViewController(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
-                }
+                self.addUserToFavorites(user: user)
 
             case .failure(let error):
                 self.presentAlertViewController(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
             }
+        }
+    }
+
+    func addUserToFavorites(user: User) {
+        //create follower object to get a login and an avatarUrl for fovorite user
+        let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+        //add the user to the favorite, save to the userDefoults
+        //if the error is nil we are gonna present success
+        PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
+            guard let error = error else {
+                self?.presentAlertViewController(title: "Success!", message: "You have succesfully favorited this user 🎉", buttonTitle: "Ok")
+                return
+            }
+            //if error is not nil
+            self?.presentAlertViewController(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
         }
     }
 }
@@ -216,6 +222,7 @@ extension FollowersListViewController: UserInfoViewControllerDelegate {
         self.username = username
         title = username
         page = 1
+        
         followers.removeAll()
         filtredFollowers.removeAll()
         //return collection view to the top

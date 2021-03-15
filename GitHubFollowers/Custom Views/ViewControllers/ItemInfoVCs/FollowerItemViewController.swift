@@ -12,6 +12,7 @@ protocol FollowerItemViewControllerDelegate: class {
 }
 
 class FollowerItemViewController: ItemInfoViewController {
+    // MARK: - Constants
     enum Constants {
         static let buttonTitle: String = "GitHub Followers"
     }
@@ -37,6 +38,7 @@ class FollowerItemViewController: ItemInfoViewController {
     }
 }
 
+// MARK: - Private
 private extension FollowerItemViewController {
 
     func setupUI() {

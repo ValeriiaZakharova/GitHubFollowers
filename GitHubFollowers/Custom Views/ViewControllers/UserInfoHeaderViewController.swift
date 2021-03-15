@@ -8,6 +8,7 @@
 import UIKit
 
 class UserInfoHeaderViewController: UIViewController {
+    // MARK: - Constants
     enum Constants {
         static let padding: CGFloat = 20
         static let textImagePadding: CGFloat = 12
@@ -15,12 +16,12 @@ class UserInfoHeaderViewController: UIViewController {
 
     var user: User!
 
-    let avatarImageView = AvatarImageView(frame: .zero)
-    let usernameLabel = GFTitleLabel(textAlignment: .left, fontSize: 34)
-    let nameLabel = SecondaryTitleLabel(fontSize: 18)
-    let locationImageView = UIImageView()
-    let locationLabel = SecondaryTitleLabel(fontSize: 18)
-    let bioLabel = GFBodyLabel(textAlignment: .left)
+    private let avatarImageView = AvatarImageView(frame: .zero)
+    private let usernameLabel = GFTitleLabel(textAlignment: .left, fontSize: 34)
+    private let nameLabel = SecondaryTitleLabel(fontSize: 18)
+    private let locationImageView = UIImageView()
+    private let locationLabel = SecondaryTitleLabel(fontSize: 18)
+    private let bioLabel = GFBodyLabel(textAlignment: .left)
 
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
@@ -34,14 +35,6 @@ class UserInfoHeaderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        downloadAvatarImage()
-    }
-
-    private func downloadAvatarImage() {
-        NetworkManager.shared.downloadImage(from: user.avatarUrl) { [weak self] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async { self.avatarImageView.image = image }
-        }
     }
 }
 
@@ -63,6 +56,7 @@ private extension UserInfoHeaderViewController {
     }
 
     func setupUI(){
+        avatarImageView.downloadImage(fromUrl: user.avatarUrl)
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? ""
         locationLabel.text = user.location ?? "No Location"
