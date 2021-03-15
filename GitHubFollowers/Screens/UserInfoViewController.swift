@@ -19,6 +19,9 @@ class UserInfoViewController: DataLoadingViewController {
         static let labelHeight: CGFloat = 50
     }
 
+    let scrollView = UIScrollView()
+    let contentView = UIView()
+
     //holders for child viewControllers - UserInfoHeaderViewController, RepoItemViewController, FollowerItemViewController
     private let headerView = UIView()
     private let itemViewOne = UIView()
@@ -76,6 +79,7 @@ private extension UserInfoViewController {
 
     func setup() {
         configureViewController()
+        configureScrollView()
         setupUI()
     }
 
@@ -85,20 +89,32 @@ private extension UserInfoViewController {
         navigationItem.rightBarButtonItem = doneButton
     }
 
+    func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        scrollView.pinToEdges(of: view)
+        contentView.pinToEdges(of: scrollView)
+
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 600)
+        ])
+    }
+
     func setupUI() {
         itemViews = [headerView, itemViewOne, itemViewTwo, dateLabel]
 
         for itemView in itemViews {
-            view.addSubview(itemView)
+            contentView.addSubview(itemView)
             itemView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                itemView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.padding),
-                itemView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.padding)
+                itemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.padding),
+                itemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.padding)
             ])
         }
 
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerView.topAnchor.constraint(equalTo: contentView.topAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 210),
 
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: Constants.padding),
