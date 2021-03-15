@@ -20,6 +20,7 @@
 		CF5287F625F13D6400A92EB4 /* SecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5287F525F13D6400A92EB4 /* SecondaryTitleLabel.swift */; };
 		CF5287F925F151CF00A92EB4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5287F825F151CF00A92EB4 /* Constants.swift */; };
 		CF74571A25FF58300025BDF3 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74571925FF58300025BDF3 /* UIView+Extension.swift */; };
+		CF74571E25FF6D5C0025BDF3 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74571D25FF6D5C0025BDF3 /* UITableView+Extension.swift */; };
 		CFB766BD25F5486500F465C6 /* ItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766BC25F5486500F465C6 /* ItemInfoView.swift */; };
 		CFB766C025F7645400F465C6 /* ItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766BF25F7645400F465C6 /* ItemInfoViewController.swift */; };
 		CFB766C325F782EE00F465C6 /* RepoItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB766C225F782EE00F465C6 /* RepoItemViewController.swift */; };
@@ -59,6 +60,7 @@
 		CF5287F525F13D6400A92EB4 /* SecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTitleLabel.swift; sourceTree = "<group>"; };
 		CF5287F825F151CF00A92EB4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CF74571925FF58300025BDF3 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		CF74571D25FF6D5C0025BDF3 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		CFB766BC25F5486500F465C6 /* ItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoView.swift; sourceTree = "<group>"; };
 		CFB766BF25F7645400F465C6 /* ItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoViewController.swift; sourceTree = "<group>"; };
 		CFB766C225F782EE00F465C6 /* RepoItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoItemViewController.swift; sourceTree = "<group>"; };
@@ -110,8 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				CFC3BA3225781D26004AC221 /* SearchViewController.swift */,
-				CFC3BA3525781D81004AC221 /* FavoritesListViewController.swift */,
 				CFC67563259E2A6400DC784E /* FollowersListViewController.swift */,
+				CFC3BA3525781D81004AC221 /* FavoritesListViewController.swift */,
 				CFD84DB525F1100500235CFA /* UserInfoViewController.swift */,
 			);
 			path = Screens;
@@ -139,6 +141,7 @@
 				CFB766CA25F7A52F00F465C6 /* Date+Extension.swift */,
 				CFB766CD25F7A57300F465C6 /* String+extension.swift */,
 				CF74571925FF58300025BDF3 /* UIView+Extension.swift */,
+				CF74571D25FF6D5C0025BDF3 /* UITableView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			files = (
 				CFE47A1125DEBA28000F4A58 /* User.swift in Sources */,
 				CF1FB47C25F8ECAF00CD3478 /* TabBarController.swift in Sources */,
+				CF74571E25FF6D5C0025BDF3 /* UITableView+Extension.swift in Sources */,
 				CF3DBB3F25C840F100EF5695 /* GFAlertViewController.swift in Sources */,
 				CFC1FF4025EFDA540029011B /* EmptyStateView.swift in Sources */,
 				CF3DBB4225C856B200EF5695 /* UIViewController+Extension.swift in Sources */,
