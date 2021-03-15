@@ -7,21 +7,38 @@
 
 import UIKit
 
+protocol FollowerItemViewControllerDelegate: class {
+    func didTapGetFollowers(for user: User)
+}
+
 class FollowerItemViewController: ItemInfoViewController {
+    // MARK: - Constants
     enum Constants {
         static let buttonTitle: String = "GitHub Followers"
     }
+
+    weak var delegate: FollowerItemViewControllerDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
 
+    init(user: User, delegate: FollowerItemViewControllerDelegate) {
+        super.init(user: user)
+        self.delegate = delegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func actionButtonTapped() {
         delegate.didTapGetFollowers(for: user)
     }
 }
 
+// MARK: - Private
 private extension FollowerItemViewController {
 
     func setupUI() {

@@ -8,17 +8,20 @@
 import UIKit
 
 protocol UserInfoViewControllerDelegate: class {
-    func didTapGitHubProfile(for user: User)
-    func didTapGetFollowers(for user: User)
+    func didRquestFollowers(for username: String)
 }
 
-class UserInfoViewController: UIViewController {
+class UserInfoViewController: DataLoadingViewController {
 
+    // MARK: - Constants
     enum Constants {
         static let padding: CGFloat = 20
         static let itemHeight: CGFloat = 140
-        static let labelHeight: CGFloat = 18
+        static let labelHeight: CGFloat = 50
     }
+
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
 
     //holders for child viewControllers - UserInfoHeaderViewController, RepoItemViewController, FollowerItemViewController
     private let headerView = UIView()
@@ -29,7 +32,7 @@ class UserInfoViewController: UIViewController {
     private var itemViews: [UIView] = []
 
     var username: String!
-    weak var delegate: FollowerListViewControllerDelegate!
+    weak var delegate: UserInfoViewControllerDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,25 +67,19 @@ class UserInfoViewController: UIViewController {
     }
 
     private func setupUIElements(with user: User) {
-        let repoItemViewController = RepoItemViewController(user: user)
-        repoItemViewController.delegate = self
-
-        let followerItemViewController = FollowerItemViewController(user: user)
-        followerItemViewController.delegate = self
-
         //add childviewcontrollers to our holdersView - headerView, itemViewOne, itemViewTwo
         self.add(childVC: UserInfoHeaderViewController(user: user), to: self.headerView)
-        self.add(childVC: repoItemViewController, to: self.itemViewOne)
-        self.add(childVC: followerItemViewController, to: self.itemViewTwo)
-        self.dateLabel.text = "GitHub since \(user.createdAt.convertToDisplayFormat())"
+        self.add(childVC: RepoItemViewController(user: user, delegate: self), to: self.itemViewOne)
+        self.add(childVC: FollowerItemViewController(user: user, delegate: self), to: self.itemViewTwo)
+        self.dateLabel.text = "GitHub since \(user.createdAt.convertToMonthYearFormat())"
     }
 }
 
 // MARK: - Private
 private extension UserInfoViewController {
-
     func setup() {
         configureViewController()
+        configureScrollView()
         setupUI()
     }
 
@@ -92,21 +89,33 @@ private extension UserInfoViewController {
         navigationItem.rightBarButtonItem = doneButton
     }
 
+    func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        scrollView.pinToEdges(of: view)
+        contentView.pinToEdges(of: scrollView)
+
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 600)
+        ])
+    }
+
     func setupUI() {
         itemViews = [headerView, itemViewOne, itemViewTwo, dateLabel]
 
         for itemView in itemViews {
-            view.addSubview(itemView)
+            contentView.addSubview(itemView)
             itemView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                itemView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.padding),
-                itemView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.padding)
+                itemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.padding),
+                itemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.padding)
             ])
         }
 
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180),
+            headerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 210),
 
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: Constants.padding),
             itemViewOne.heightAnchor.constraint(equalToConstant: Constants.itemHeight),
@@ -120,8 +129,8 @@ private extension UserInfoViewController {
     }
 }
 
-// MARK: - UserInfoViewControllerDelegate
-extension UserInfoViewController: UserInfoViewControllerDelegate {
+// MARK: - RepoItemViewControllerDelegate
+extension UserInfoViewController: RepoItemViewControllerDelegate {
     func didTapGitHubProfile(for user: User) {
         //show safariview controller
         guard let url = URL(string: user.htmlUrl) else {
@@ -130,11 +139,11 @@ extension UserInfoViewController: UserInfoViewControllerDelegate {
         }
         presentSafariViewController(with: url)
     }
+}
 
+// MARK: - FollowerItemViewControllerDelegate
+extension UserInfoViewController: FollowerItemViewControllerDelegate {
     func didTapGetFollowers(for user: User) {
-        //dismiss
-        //tell follower list screen the new user
-
         //check if user has any followers, if not show an alert
         guard user.followers != 0 else {
             presentAlertViewController(title: "No followers", message: "This user fas no followers. What a shame 😕", buttonTitle: "So sad")

@@ -8,6 +8,7 @@
 import UIKit
 
 class ItemInfoViewController: UIViewController {
+    // MARK: - Constants
     enum Constants {
         static let radius: CGFloat = 18
         static let padding: CGFloat = 20
@@ -16,7 +17,6 @@ class ItemInfoViewController: UIViewController {
     }
 
     var user : User!
-    weak var delegate: UserInfoViewControllerDelegate!
 
     let stackView = UIStackView()
     let itemInfoViewOne = ItemInfoView()
@@ -35,13 +35,10 @@ class ItemInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupActionButton()
+        setupActions()
     }
 
-    private func setupActionButton() {
-        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
-    }
-
+    // MARK: - Actions
     @objc func actionButtonTapped() {}
 }
 
@@ -59,8 +56,7 @@ private extension ItemInfoViewController {
     }
 
     func setupViewHierarchy() {
-        view.addSubview(stackView)
-        view.addSubview(actionButton)
+        view.addSubviews(stackView, actionButton)
         stackView.addArrangedSubview(itemInfoViewOne)
         stackView.addArrangedSubview(itemInfoViewTwo)
     }
@@ -83,5 +79,9 @@ private extension ItemInfoViewController {
 
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
+    }
+
+    func setupActions() {
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
     }
 }

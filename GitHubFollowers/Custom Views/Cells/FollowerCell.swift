@@ -7,15 +7,17 @@
 
 import UIKit
 
-enum Constants {
-    static let padding: CGFloat = 8
-}
-
 class FollowerCell: UICollectionViewCell {
+
+    // MARK: - Constants
+    enum Constants {
+        static let padding: CGFloat = 8
+    }
+
     static let reuseID = "FollowerCell"
 
-    let avatarImageView = AvatarImageView(frame: .zero)
-    let usernameLabel = GFTitleLabel(textAlignment: .center, fontSize: 16)
+    private let avatarImageView = AvatarImageView(frame: .zero)
+    private let usernameLabel = GFTitleLabel(textAlignment: .center, fontSize: 16)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,15 +29,15 @@ class FollowerCell: UICollectionViewCell {
     }
 
     func set(follower: Follower) {
+        avatarImageView.downloadImage(fromUrl: follower.avatarUrl)
         usernameLabel.text = follower.login
-        avatarImageView.downloadImage(from: follower.avatarUrl)
     }
 }
 
+// MARK: - Private
 private extension FollowerCell {
     func configure() {
-        addSubview(avatarImageView)
-        addSubview(usernameLabel)
+        addSubviews(avatarImageView, usernameLabel)
 
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.padding),

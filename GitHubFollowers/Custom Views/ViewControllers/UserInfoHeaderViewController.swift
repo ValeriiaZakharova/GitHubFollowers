@@ -8,6 +8,7 @@
 import UIKit
 
 class UserInfoHeaderViewController: UIViewController {
+    // MARK: - Constants
     enum Constants {
         static let padding: CGFloat = 20
         static let textImagePadding: CGFloat = 12
@@ -15,12 +16,12 @@ class UserInfoHeaderViewController: UIViewController {
 
     var user: User!
 
-    let avatarImageView = AvatarImageView(frame: .zero)
-    let usernameLabel = GFTitleLabel(textAlignment: .left, fontSize: 34)
-    let nameLabel = SecondaryTitleLabel(fontSize: 18)
-    let locationImageView = UIImageView()
-    let locationLabel = SecondaryTitleLabel(fontSize: 18)
-    let bioLabel = GFBodyLabel(textAlignment: .left)
+    private let avatarImageView = AvatarImageView(frame: .zero)
+    private let usernameLabel = GFTitleLabel(textAlignment: .left, fontSize: 34)
+    private let nameLabel = SecondaryTitleLabel(fontSize: 18)
+    private let locationImageView = UIImageView()
+    private let locationLabel = SecondaryTitleLabel(fontSize: 18)
+    private let bioLabel = GFBodyLabel(textAlignment: .left)
 
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
@@ -46,23 +47,23 @@ private extension UserInfoHeaderViewController {
     }
 
     func addSubview() {
-        view.addSubview(avatarImageView)
-        view.addSubview(usernameLabel)
-        view.addSubview(nameLabel)
-        view.addSubview(locationImageView)
-        view.addSubview(locationLabel)
-        view.addSubview(bioLabel)
+        view.addSubviews(avatarImageView,
+                         usernameLabel,
+                         nameLabel,
+                         locationImageView,
+                         locationLabel,
+                         bioLabel)
     }
 
     func setupUI(){
-        avatarImageView.downloadImage(from: user.avatarUrl)
+        avatarImageView.downloadImage(fromUrl: user.avatarUrl)
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? ""
         locationLabel.text = user.location ?? "No Location"
         bioLabel.text = user.bio ?? "No bio available"
 
         bioLabel.numberOfLines = 3
-        locationImageView.image = UIImage(systemName: SFSymbols.location)
+        locationImageView.image = SFSymbols.location
         locationImageView.tintColor = .secondaryLabel
     }
 
@@ -98,7 +99,7 @@ private extension UserInfoHeaderViewController {
             bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: Constants.textImagePadding),
             bioLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
             bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bioLabel.heightAnchor.constraint(equalToConstant: 60)
+            bioLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }

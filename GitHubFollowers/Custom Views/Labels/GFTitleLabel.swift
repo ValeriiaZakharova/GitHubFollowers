@@ -18,11 +18,12 @@ class GFTitleLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init(textAlignment: NSTextAlignment, fontSize: CGFloat) {
-        super.init(frame: .zero)
+    //"convenience" means - it has to call a desegnated initialiser - one of the requered object - in this case is override init(frame: CGRect)
+    //we no longer call super.init we call self.init
+    convenience init(textAlignment: NSTextAlignment, fontSize: CGFloat) {
+        self.init(frame: .zero)
         self.textAlignment = textAlignment
         self.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
-        configure()
     }
 
     private func configure() {
@@ -30,7 +31,6 @@ class GFTitleLabel: UILabel {
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9
         lineBreakMode = .byTruncatingTail
-
         translatesAutoresizingMaskIntoConstraints = false
     }
 }
