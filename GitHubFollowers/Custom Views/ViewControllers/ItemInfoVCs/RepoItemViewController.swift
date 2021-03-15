@@ -7,14 +7,29 @@
 
 import UIKit
 
+protocol RepoItemViewControllerDelegate: class {
+    func didTapGitHubProfile(for user: User)
+}
+
 class RepoItemViewController: ItemInfoViewController {
     enum Constants {
         static let buttonTitle: String = "GitHub Profile"
     }
 
+    weak var delegate: RepoItemViewControllerDelegate!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+
+    init(user: User, delegate: RepoItemViewControllerDelegate) {
+        super.init(user: user)
+        self.delegate = delegate
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func actionButtonTapped() {

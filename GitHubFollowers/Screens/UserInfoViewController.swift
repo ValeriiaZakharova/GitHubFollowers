@@ -8,8 +8,7 @@
 import UIKit
 
 protocol UserInfoViewControllerDelegate: class {
-    func didTapGitHubProfile(for user: User)
-    func didTapGetFollowers(for user: User)
+    func didRquestFollowers(for username: String)
 }
 
 class UserInfoViewController: DataLoadingViewController {
@@ -29,7 +28,7 @@ class UserInfoViewController: DataLoadingViewController {
     private var itemViews: [UIView] = []
 
     var username: String!
-    weak var delegate: FollowerListViewControllerDelegate!
+    weak var delegate: UserInfoViewControllerDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,16 +63,10 @@ class UserInfoViewController: DataLoadingViewController {
     }
 
     private func setupUIElements(with user: User) {
-        let repoItemViewController = RepoItemViewController(user: user)
-        repoItemViewController.delegate = self
-
-        let followerItemViewController = FollowerItemViewController(user: user)
-        followerItemViewController.delegate = self
-
         //add childviewcontrollers to our holdersView - headerView, itemViewOne, itemViewTwo
         self.add(childVC: UserInfoHeaderViewController(user: user), to: self.headerView)
-        self.add(childVC: repoItemViewController, to: self.itemViewOne)
-        self.add(childVC: followerItemViewController, to: self.itemViewTwo)
+        self.add(childVC: RepoItemViewController(user: user, delegate: self), to: self.itemViewOne)
+        self.add(childVC: FollowerItemViewController(user: user, delegate: self), to: self.itemViewTwo)
         self.dateLabel.text = "GitHub since \(user.createdAt.convertToMonthYearFormat())"
     }
 }
@@ -120,8 +113,8 @@ private extension UserInfoViewController {
     }
 }
 
-// MARK: - UserInfoViewControllerDelegate
-extension UserInfoViewController: UserInfoViewControllerDelegate {
+// MARK: - RepoItemViewControllerDelegate
+extension UserInfoViewController: RepoItemViewControllerDelegate {
     func didTapGitHubProfile(for user: User) {
         //show safariview controller
         guard let url = URL(string: user.htmlUrl) else {
@@ -130,7 +123,10 @@ extension UserInfoViewController: UserInfoViewControllerDelegate {
         }
         presentSafariViewController(with: url)
     }
+}
 
+// MARK: - FollowerItemViewControllerDelegate
+extension UserInfoViewController: FollowerItemViewControllerDelegate {
     func didTapGetFollowers(for user: User) {
         //check if user has any followers, if not show an alert
         guard user.followers != 0 else {

@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol FollowerListViewControllerDelegate: class {
-    func didRquestFollowers(for username: String)
-}
-
 class FollowersListViewController: DataLoadingViewController {
     enum Section { case main }
 
@@ -214,7 +210,7 @@ extension FollowersListViewController: UISearchResultsUpdating {
 }
 
 // MARK: - FollowerListViewControllerDelegate
-extension FollowersListViewController: FollowerListViewControllerDelegate {
+extension FollowersListViewController: UserInfoViewControllerDelegate {
     func didRquestFollowers(for username: String) {
         // reset the screen with new user
         self.username = username

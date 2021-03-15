@@ -16,7 +16,6 @@ class ItemInfoViewController: UIViewController {
     }
 
     var user : User!
-    weak var delegate: UserInfoViewControllerDelegate!
 
     let stackView = UIStackView()
     let itemInfoViewOne = ItemInfoView()
